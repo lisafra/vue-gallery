@@ -40,11 +40,10 @@
       }
     },
     methods: {
-      // 图片位置处理
       // 图片点击事件处理
       fnEventHandle () {
         if (this.center) {
-          this.$emit('onreverse')
+          this.$emit('onreverse', this.index)
         } else {
           this.$emit('rearrange', this.index)
         }
@@ -61,15 +60,22 @@
     padding: 30px;
     cursor: pointer;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #eee;
     transition: all .6s ease;
     transform-style: preserve-3d;
     transform-origin: 0 50% 0;
     box-shadow: 2px 2px 4px rgba(7, 17, 27, 0.2), 2px 2px 8px rgba(7, 17, 27, 0.1);
+    img{
+      opacity:.7;
+    }
     &.center-img {
       z-index: 1001;
+      background-color: #fff;
       box-shadow: 2px 2px 2px rgba(7, 17, 27, 0.1), 2px 2px 4px rgba(7, 17, 27, 0.2), 2px 2px 16px rgba(7, 17, 27, 0.2), 2px 2px 24px rgba(7, 17, 27, 0.1);
       transform: rotate(0deg);
+      img{
+        opacity:1;
+      }
     }
     figcaption {
       text-align: center;

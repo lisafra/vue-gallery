@@ -2,14 +2,14 @@
   <section class="gallery-stage" ref="stage">
     <!--图片区-->
     <div class="img-container">
-      <single-img-box v-for="(item, index) in imageData" :key="index" :center="index == centerIndex"
-                      :data="item"
-                      :index="index" @rearrange="fnReArrange" @onreverse="fnChangeReverse(item)"
+      <single-img-box v-for="(item, index) in imageData" :key="index" :center="index == centerIndex" :data="item"
+                      :index="index" @rearrange="fnReArrange" @onreverse="fnChangeReverse"
       ></single-img-box>
     </div>
 
     <!--导航区-->
-    <controller></controller>
+    <controller :current="centerIndex" total="16"
+                @onreverse="fnChangeReverse" @rearrange="fnReArrange"></controller>
   </section>
 </template>
 
@@ -22,7 +22,7 @@
     data () {
       return {
         imageData: require('../data/data.json'),
-        centerIndex: 1,
+        centerIndex: 0,
         allImgNumArr: [],
         topImgIndex: -1,
         centerPos: {},
@@ -36,6 +36,8 @@
     },
     mounted () {
       this.$nextTick(() => {
+        // 随机一个当前图片
+        this.centerIndex = Math.floor(Math.random() * this.imageData.length)
         // 首先拿到舞台的大小
         let stageDOM = this.$refs.stage
         let stageW = stageDOM.scrollWidth
@@ -123,8 +125,8 @@
         this.fnArrageImg()
       },
       // 图片正反面切负
-      fnChangeReverse (obj) {
-        obj.inverse = !obj.inverse
+      fnChangeReverse (index) {
+        this.imageData[index].inverse = !this.imageData[index].inverse
       },
       // 获取随机定位方法
       fnGetRandomPos (min, max) {
