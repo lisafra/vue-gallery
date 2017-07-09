@@ -1,28 +1,28 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+  <div id="app" class="container">
+    <gallery-stage></gallery-stage>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
+import GalleryStage from './components/GalleryStage.vue'
 export default {
   name: 'app',
-  components: {
-    Hello
-  }
+  components: { GalleryStage }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="less" scoped >
+  html, body{
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    overflow: hidden;
+  }
+  .container {
+    width: 100%;
+    height: 100vh;
+    background-color: #ddd;
+    overflow: hidden;
+  }
 </style>
